@@ -1,0 +1,35 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environment
+.env
+.venv
+env/
+venv/
+
+# Logs
+*.log
+*.txt
+*.json
+
+# Model files
+*.pkl
+*.h5
+*.joblib
+*.sav
+
+# CatBoost info
+catboost_info/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Reports/outputs
+*.html
