@@ -1,0 +1,38 @@
+[
+  {
+    "timestamp": "2025-08-26T11:15:11.459090",
+    "user_id": "user001",
+    "actual_outcome": 1,
+    "predicted_probability": 0.85,
+    "prediction": 1,
+    "correct": 1,
+    "threshold": 0.5
+  },
+  {
+    "timestamp": "2025-08-26T11:15:11.459090",
+    "user_id": "user002",
+    "actual_outcome": 0,
+    "predicted_probability": 0.25,
+    "prediction": 0,
+    "correct": 1,
+    "threshold": 0.5
+  },
+  {
+    "timestamp": "2025-08-26T11:15:11.459090",
+    "user_id": "user003",
+    "actual_outcome": 1,
+    "predicted_probability": 0.3,
+    "prediction": 0,
+    "correct": 0,
+    "threshold": 0.5
+  },
+  {
+    "timestamp": "2025-08-26T11:15:11.459090",
+    "user_id": "user004",
+    "actual_outcome": 0,
+    "predicted_probability": 0.75,
+    "prediction": 1,
+    "correct": 0,
+    "threshold": 0.5
+  }
+]
