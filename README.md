@@ -66,6 +66,13 @@ project_ai/
 
 ---
 
+## Model Files
+
+You can access the model files needed for this project by clicking the button below:
+
+[📁 Access Model Files](https://drive.google.com/drive/folders/1rHuIGTnD2JCR4D3zsbYXqT4vXF6ZCcUu?usp=sharing)
+
+
 ## 🏋️ Training the Model
 To train from scratch:
 ```bash
