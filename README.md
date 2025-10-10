@@ -1,111 +1,110 @@
-Project AI – E-Commerce ML System
-📌 Overview
-This project implements an end-to-end machine learning system for e-commerce, covering the full lifecycle of model development:
+# E-commerce Analyzer with ML Purchase Prediction
 
-Data preparation & training
+A Chrome extension that analyzes e-commerce pages, provides product comparisons, sentiment analysis, and now includes real-time ML-powered purchase probability predictions.
 
-CatBoost model deployment (single-model API)
+## Features
 
-Real-time inference
+### Existing Features
+- **Product Analysis**: Extracts product details (name, price, rating, specs) from e-commerce pages
+- **Amazon Review Sentiment**: Analyzes Amazon product reviews with local sentiment analysis
+- **Product Comparison**: Compare products using Gemini AI or enhanced fallback data
+- **Best Buy Recommendations**: Find the best product within your budget range
 
-Model monitoring
+### New ML Features
+- **Real-time Purchase Prediction**: Uses machine learning to predict purchase probability based on user behavior
+- **Personalized Recommendations**: Get high/medium/low purchase recommendations
+- **Behavioral Analysis**: Analyzes clicks, scroll depth, time spent, and other engagement metrics
 
-Documentation & reports
+## Installation
 
-The system is modular, scalable, and production-ready, with emphasis on reliable baseline CatBoost ML deployment and robust monitoring.
+1. **Clone or download** this repository
+2. **Start the ML API Server**:
+   ```bash
+   python extension_api.py
+   ```
+   The server will run on `http://127.0.0.1:8001`
 
-🚀 Features
-Model Training – CatBoost-based training pipeline
-(ecommerce_ml_training.py, run_mm_train.py)
+3. **Load the Extension in Chrome**:
+   - Open Chrome and go to `chrome://extensions/`
+   - Enable "Developer mode" (top right)
+   - Click "Load unpacked"
+   - Select the `webpatternrecognition` folder
 
-Deployment – Scripts for exporting & serving models
-(deploy_model.py, deployed_model.pkl)
+4. **Test the Extension**:
+   - Navigate to any e-commerce site (Amazon, etc.)
+   - Click the extension icon
+   - Use the various analysis features
+   - The ML prediction will appear automatically as you interact with the page
 
-API – Simple REST API for predictions
-(api_example.py)
+## How It Works
 
-Model Monitoring – Automated monitoring tools
-(model_monitoring.py, logs in prep_log.txt)
+### ML Model Integration
+- The extension collects user interaction data (clicks, scrolls, time spent)
+- Extracts product features (price, brand, category, time features)
+- Sends data to the local FastAPI server
+- Receives real-time purchase probability predictions
+- Displays recommendations in the popup UI
 
-Testing Suite – Unit/integration testing
-(test_deployed_model.py)
+### Data Privacy
+- All processing happens locally on your machine
+- No user data is sent to external servers
+- ML model runs offline
 
-Documentation – Reports and flowcharts for workflows and system design
+## Usage
 
-📂 Project Structure
-text
-project_ai/
-│── ecommerce_ml_training.py           # Core training pipeline
-│── deploy_model.py                    # Model deployment script
-│── run_mm_prep.py / run_mm_train.py   # Data prep & training automation
-│── model_monitoring.py                # Tools for monitoring deployed model
-│── api_example.py                     # Basic API for serving predictions
-│── test_deployed_model.py             # Test scripts for CatBoost model/API
-│── *.pkl                              # Trained model artifacts
-│── catboost_info/                     # Training logs and metrics
-│── docs & reports (.md/.html)         # Project reports and system guides
-⚙️ Setup & Installation
-Clone the repository
+1. **Basic Analysis**: Click "Analyze E-commerce Page" to extract products
+2. **Budget Filtering**: Set min/max price and find best buy
+3. **Sentiment Analysis**: Works on Amazon product pages
+4. **Product Comparison**: Compare two products side-by-side
+5. **ML Predictions**: View real-time purchase probability as you browse
 
-bash
-git clone https://github.com/Krish8732/project_ai.git
-cd project_ai
-Install dependencies
+## Troubleshooting
 
-bash
-pip install -r requirements.txt
-Verify installation
+### ML Predictions Not Showing
+- Ensure the API server is running (`python extension_api.py`)
+- Check browser console for errors
+- Verify the extension is loaded and active
 
-bash
-python -m unittest discover
-🏋️ Training the Model
-To train from scratch:
+### Extension Not Loading
+- Check `manifest.json` for syntax errors
+- Ensure all required files are present
+- Try reloading the extension in Chrome
 
-bash
-python ecommerce_ml_training.py
-Or using automated runner:
+### API Server Issues
+- Make sure port 8001 is not blocked
+- Check if `deployed_model.pkl` exists
+- Run `python test_api_server.py` to test connectivity
 
-bash
-python run_mm_prep.py
-python run_mm_train.py
-Artifacts saved as .pkl files.
+## Development
 
-🌐 Deploying the Model
-Start API server:
+### Project Structure
+```
+├── extension_api.py          # FastAPI server for ML predictions
+├── deployed_model.pkl        # Trained ML model
+├── test_api_server.py       # API testing script
+├── webpatternrecognition/
+│   ├── manifest.json         # Extension manifest
+│   ├── popup.html           # Extension popup UI
+│   ├── popup.js             # Main popup logic
+│   ├── content.js           # Product extraction
+│   ├── content_predict.js   # ML event collection
+│   └── icon.png             # Extension icon
+├── ML_MODEL_INTEGRATION_PLAN.md  # Integration documentation
+└── README.md                # This file
+```
 
-bash
-python api_example.py
-Test with:
+### Adding New Features
+- Modify `content_predict.js` for new event types
+- Update `popup.js` for new UI elements
+- Add new endpoints to `extension_api.py` if needed
 
-bash
-python test_deployed_model.py
-📊 Monitoring
-Run monitoring tools:
+## Requirements
+- Python 3.7+
+- Chrome browser
+- Required Python packages: fastapi, uvicorn, joblib, pandas, scikit-learn
 
-bash
-python model_monitoring.py
-Logs saved in prep_log.txt.
+## License
+This project is for educational purposes. Use responsibly and in accordance with website terms of service.
 
-📑 Documentation & Reports
-Deployment Guide: DEPLOYMENT_GUIDE.md
-
-System Flowcharts: SYSTEM_FLOWCHARTS.md
-
-Project Reports: E_COMMERCE_ML_PROJECT_REPORT.md, FINAL_PROJECT_REPORT.md
-
-Summaries: PROJECT_SUMMARY_DOCUMENT.md
-
-🔮 Future Enhancements
-Advanced monitoring dashboards
-
-Model versioning
-
-CI/CD pipeline integration
-
-API authentication & rate limiting
-
-🤝 Contributing
-Fork the repo and submit pull requests. For major changes, open an issue first to discuss.
-
-📜 License
-Licensed under the MIT License.
+## Contributing
+Feel free to submit issues and enhancement requests!

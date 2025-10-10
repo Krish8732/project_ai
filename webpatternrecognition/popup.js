@@ -97,6 +97,7 @@ document.getElementById("analyze").addEventListener("click", async () => {
   });
 
 let lastResponse = null;
+let lastMLPrediction = null;
 
 // Budget filter and best buy logic
 
@@ -156,6 +157,72 @@ document.getElementById("copy-btn").addEventListener("click", () => {
   const text = resultDiv.innerText;
   navigator.clipboard.writeText(text).then(() => {
     alert("Results copied to clipboard!");
+  });
+});
+
+// Load ML prediction from storage when popup opens
+chrome.storage.local.get(['ml_prediction', 'ml_prediction_timestamp'], (result) => {
+  console.log('🔍 Popup: Loading ML prediction from storage:', result);
+  if (result.ml_prediction) {
+    console.log('🔍 Popup: Found ML prediction, updating UI');
+    lastMLPrediction = result.ml_prediction;
+    updateMLPredictionUI();
+  } else {
+    console.log('🔍 Popup: No ML prediction found in storage');
+  }
+});
+
+function updateMLPredictionUI() {
+  const mlDiv = document.getElementById('ml-prediction');
+  if (!mlDiv) {
+    // Create container if not exists
+    const container = document.createElement('div');
+    container.id = 'ml-prediction';
+    container.style.padding = '10px';
+    container.style.marginTop = '10px';
+    container.style.backgroundColor = '#f0f8ff';
+    container.style.borderRadius = '6px';
+    container.style.border = '1px solid #007bff';
+    container.style.fontSize = '14px';
+    container.style.fontWeight = 'bold';
+    const resultDiv = document.getElementById('result');
+    resultDiv.parentNode.insertBefore(container, resultDiv.nextSibling);
+  }
+  const displayDiv = document.getElementById('ml-prediction');
+  if (lastMLPrediction) {
+    displayDiv.innerHTML = `
+      Purchase Probability: ${(lastMLPrediction.purchase_probability * 100).toFixed(2)}%<br>
+      Recommendation: <span style="color:${getRecommendationColor(lastMLPrediction.recommendation)}">${lastMLPrediction.recommendation.toUpperCase()}</span><br>
+      Features Used: ${lastMLPrediction.feature_count}
+    `;
+  } else {
+    displayDiv.innerHTML = 'No ML prediction available yet.';
+  }
+}
+
+function getRecommendationColor(rec) {
+  if (!rec) return '#808080'; // gray for null/undefined
+  switch (rec.toLowerCase()) {
+    case 'very_high': return '#ff0000'; // red
+    case 'high': return '#ff4500'; // orange red
+    case 'medium': return '#ffa500'; // orange
+    case 'low': return '#32cd32'; // lime green
+    case 'very_low': return '#008000'; // green
+    default: return '#000000'; // black
+  }
+}
+
+// Request latest ML prediction on popup open
+document.addEventListener('DOMContentLoaded', () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (tabs.length > 0) {
+      chrome.tabs.sendMessage(tabs[0].id, { type: 'GET_ML_PREDICTION' }, (response) => {
+        if (response && response.prediction) {
+          lastMLPrediction = response.prediction;
+          updateMLPredictionUI();
+        }
+      });
+    }
   });
 });
 

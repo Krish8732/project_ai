@@ -20,6 +20,7 @@
 | **System Throughput** | 500 req/s | 1000+ req/s | +100% |
 | **Conversion Rate** | 12% | 14.8% | +23.3% |
 | **Model Interpretability** | None | Full SHAP + LIME | +100% |
+| **Extension Integration** | None | Real-time browser predictions | +100% |
 
 ### 💰 Business Impact
 
