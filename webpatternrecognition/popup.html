@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Summary</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        min-width: 500px;
+        min-height: 300px;
+        padding: 15px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .options {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      button {
+        padding: 8px 15px;
+        background-color: #4285f4;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #3367d6;
+      }
+
+      #copy-btn {
+        background-color: #34a853;
+      }
+
+      #copy-btn:hover {
+        background-color: #2e8b57;
+      }
+
+      #summary-type {
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+
+      #result {
+        margin-top: 15px;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-height: 150px;
+        max-height: 400px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        line-height: 1.5;
+      }
+
+      #result ul {
+        padding-left: 20px;
+      }
+
+      #result li {
+        margin-bottom: 10px;
+      }
+
+      .comparison-section {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 15px;
+        margin-bottom: 15px;
+      }
+
+      .comparison-section h3 {
+        margin-top: 0;
+        color: #333;
+        border-bottom: 2px solid #4285f4;
+        padding-bottom: 5px;
+      }
+
+      .comparison-inputs {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+
+      .comparison-inputs label {
+        font-weight: bold;
+        min-width: 80px;
+      }
+
+      .comparison-inputs input {
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 200px;
+      }
+
+      #compare-products {
+        background-color: #ff6b35;
+        margin-top: 10px;
+      }
+
+      #compare-products:hover {
+        background-color: #e55a2b;
+      }
+
+      #compare-enhanced:hover {
+        background-color: #218838;
+      }
+
+      #clear-comparison:hover {
+        background-color: #5a6268;
+      }
+
+      #test-api:hover {
+        background-color: #138496;
+      }
+
+      .loading {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 150px;
+      }
+
+      .loader {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h2>E-commerce Page Analyzer</h2>
+
+
+    <div class="options">
+      <button id="analyze">Analyze E-commerce Page</button>
+      <button id="analyze-sentiment">Analyze Product Reviews</button>
+      <button id="copy-btn">Copy Results</button>
+    </div>
+
+    <div style="margin-bottom: 15px;">
+      <label for="min-price">Min Price:</label>
+      <input type="number" id="min-price" style="width:80px;" min="0" placeholder="0">
+      <label for="max-price">Max Price:</label>
+      <input type="number" id="max-price" style="width:80px;" min="0" placeholder="100000">
+      <button id="find-best-buy">Find Best Buy in Budget</button>
+    </div>
+
+    <div class="comparison-section">
+      <h3>Product Comparison</h3>
+      <div class="comparison-inputs">
+        <label for="product1">Product 1:</label>
+        <input type="text" id="product1" placeholder="e.g. iPhone 15 Pro">
+      </div>
+      <div class="comparison-inputs">
+        <label for="product2">Product 2:</label>
+        <input type="text" id="product2" placeholder="e.g. Samsung Galaxy S24">
+      </div>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button id="compare-products">Compare Products</button>
+        <button id="clear-comparison" style="background-color: #6c757d;">Clear</button>
+        <button id="test-api" style="background-color: #17a2b8; font-size: 11px;">Test API</button>
+      </div>
+      <p style="font-size: 12px; color: #666; margin: 8px 0 0 0;">
+        💡 Tip: Don't worry about typos - our AI will understand and correct them!<br>
+        <span style="font-size: 11px; color: #888;">
+          Examples: "iphne 15 pro vs samsng galxy s24", "macbok air vs del xps 13", "nke air max vs adids ultraboost"
+        </span>
+      </p>
+    </div>
+
+    <div id="result">
+      Click 'Analyze E-commerce Page' to list all products, prices, and ratings found on this page.
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
