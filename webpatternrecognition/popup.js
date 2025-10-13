@@ -191,7 +191,7 @@ function updateMLPredictionUI() {
   const displayDiv = document.getElementById('ml-prediction');
   if (lastMLPrediction) {
     displayDiv.innerHTML = `
-      Purchase Probability: ${(lastMLPrediction.purchase_probability * 100).toFixed(2)}%<br>
+      Purchase Probability: ${lastMLPrediction.purchase_probability.toFixed(2)}%<br>
       Recommendation: <span style="color:${getRecommendationColor(lastMLPrediction.recommendation)}">${lastMLPrediction.recommendation.toUpperCase()}</span><br>
       Features Used: ${lastMLPrediction.feature_count}
     `;

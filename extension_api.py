@@ -59,22 +59,25 @@ async def predict_event(payload: dict = Body(...)):
         model = deployment_package['model']
         prob = float(model.predict_proba(processed)[:, 1][0])
 
-        # More granular recommendation levels with diverse colors
-        if prob >= 0.9:
+        # Convert to percentage for display
+        prob_percentage = prob * 100
+
+        # More granular recommendation levels with diverse colors (using percentage thresholds)
+        if prob_percentage >= 90:
             recommendation = "very_high"
-        elif prob >= 0.7:
+        elif prob_percentage >= 70:
             recommendation = "high"
-        elif prob >= 0.5:
+        elif prob_percentage >= 50:
             recommendation = "medium_high"
-        elif prob >= 0.3:
+        elif prob_percentage >= 30:
             recommendation = "medium"
-        elif prob >= 0.1:
+        elif prob_percentage >= 10:
             recommendation = "low"
         else:
             recommendation = "very_low"
 
         return {
-            "purchase_probability": prob,
+            "purchase_probability": prob_percentage,
             "recommendation": recommendation,
             "feature_count": len(feature_names)
         }
